@@ -56,13 +56,13 @@ end, {redis_addr=ret.redis, url=ret.url}))
 srv.GET("/", mw.echo(ret.mainpage)) -- Main page.
 srv.POST("/", mw.new(function() -- Putting up pastes
 	local data = form("f") or form("c")
-    local life = tonumber(form("life")) or maxexpiresecs
+	local life = tonumber(form("life")) or maxexpiresecs
 	local plain = form("html") and false or true
 	if life == nil then
 		content("Invalid expire time", 400, "text/plain")
-    elseif life > maxexpiresecs then
-    	content("Expire time too long. Max is "..tostring(maxexpiresecs)+" seconds", 400, "text/plain")
-    elseif (life < 30) then
+	elseif life > maxexpiresecs then
+		content("Expire time too long. Max is "..tostring(maxexpiresecs)+" seconds", 400, "text/plain")
+	elseif (life < 30) then
 		content("Expire time too short. Min is 30 seconds", 400, "text/plain")
 	elseif data then
 		if #data <= maxpastesize then
