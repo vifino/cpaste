@@ -16,9 +16,14 @@ srv.GET("/:id", mw.new(function() -- Main Retrieval of Pastes.
 				tag"form"[{action=url, method="POST", ["accept-charset"]="UTF-8"}](
 					tag"textarea"[{name="c", cols="80", rows="24"}](),
 					tag"br",
-					tag"button"[{type="submit"}]("paste")
+					tag"hr",
+					"Expire time (seconds): ",
+					tag"input"[{type="number", name="life", value=tostring(maxexpiresecs), min="30",max=tostring(maxexpiresecs)}](),
+					tag"br"
+					tag"button"[{type="submit"}]("Paste")
+				)
 			)
-		)))
+		))
 	elseif #id ~= 8 then
 		content("No such paste.", 404, "text/plain")
 	else
@@ -51,8 +56,15 @@ end, {redis_addr=ret.redis, url=ret.url}))
 srv.GET("/", mw.echo(ret.mainpage)) -- Main page.
 srv.POST("/", mw.new(function() -- Putting up pastes
 	local data = form("f") or form("c")
+	local life = tonumber(form("life")) or maxexpiresecs
 	local plain = form("html") and false or true
-	if data then
+	if life == nil then
+		content("Invalid expire time", 400, "text/plain")
+	elseif life > maxexpiresecs then
+		content("Expire time too long. Max is "..tostring(maxexpiresecs)+" seconds", 400, "text/plain")
+	elseif (life < 30) then
+		content("Expire time too short. Min is 30 seconds", 400, "text/plain")
+	elseif data then
 		if #data <= maxpastesize then
 			math.randomseed(unixtime())
 			local id = ""
@@ -71,9 +83,9 @@ srv.POST("/", mw.new(function() -- Putting up pastes
 			if err ~= nil then error(err) end
 			local r, err = con.Cmd("set", "cpastemdata:"..id, plain and "plain" or "html") -- Set cpastemdate:<randomid> to the metadata
 			if err ~= nil then error(err) end
-			local r, err = con.Cmd("expire", "cpaste:"..id, expiretime) -- Make it expire
+			local r, err = con.Cmd("expire", "cpaste:"..id, life) -- Make it expire
 			if err ~= nil then error(err) end
-			local r, err = con.Cmd("expire", "cpastemdata:"..id, expiretime) -- Make it expire
+			local r, err = con.Cmd("expire", "cpastemdata:"..id, life) -- Make it expire
 			if err ~= nil then error(err) end
 			con.Close()
 			content(url..id.."\n", 200, "text/plain")
@@ -83,5 +95,5 @@ srv.POST("/", mw.new(function() -- Putting up pastes
 	else
 		content("No content given.", 400, "text/plain")
 	end
-end, {url=ret.url, expiretime=ret.expiresecs, redis_addr=ret.redis, maxpastesize=ret.maxpastesize}))
+end, {url=ret.url, maxexpiresecs=ret.maxexpiresecs, redis_addr=ret.redis, maxpastesize=ret.maxpastesize}))
 print("Ready for action!")

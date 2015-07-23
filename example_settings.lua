@@ -1,7 +1,7 @@
 -- Settings
 url = "http://mydomain.mytld:8081/"
 redis = "127.0.0.1:6379"
-expiresecs = 604800
+maxexpiresecs = 604800
 maxpastesize = 64 * 1024 -- 64KiB
 mainpage = doctype()(
 	tag"head"(
@@ -25,7 +25,7 @@ mainpage = doctype()(
 -- Things required to make this stuff actually work! \o/
 local ret = {}
 ret.url = url
-ret.expiresecs = expiresecs
+ret.maxexpiresecs = maxexpiresecs
 ret.mainpage = mainpage
 ret.redis = redis
 ret.maxpastesize = maxpastesize
