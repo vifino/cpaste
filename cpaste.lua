@@ -18,7 +18,7 @@ srv.GET("/:id", mw.new(function() -- Main Retrieval of Pastes.
 					tag"br",
 					tag"hr",
 					"Expire time (seconds): ",
-					tag"input"[{type="number", name="life", min="30",max=tostring(maxexpiresecs)}](),
+					tag"input"[{type="number", name="life", value=tostring(maxexpiresecs), min="30",max=tostring(maxexpiresecs)}](),
 					tag"br"
 					tag"button"[{type="submit"}]("Paste")
 				)
@@ -56,9 +56,11 @@ end, {redis_addr=ret.redis, url=ret.url}))
 srv.GET("/", mw.echo(ret.mainpage)) -- Main page.
 srv.POST("/", mw.new(function() -- Putting up pastes
 	local data = form("f") or form("c")
-    local life = form("life") or maxexpiresecs
+    local life = tonumber(form("life")) or maxexpiresecs
 	local plain = form("html") and false or true
-    if life > maxexpiresecs then
+	if life == nil then
+		content("Invalid expire time", 400, "text/plain")
+    elseif life > maxexpiresecs then
     	content("Expire time too long. Max is "..tostring(maxexpiresecs)+" seconds", 400, "text/plain")
     elseif (life < 30) then
 		content("Expire time too short. Min is 30 seconds", 400, "text/plain")
