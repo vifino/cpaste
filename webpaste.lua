@@ -51,6 +51,11 @@ return doctype()(
 				height: 100%;
 				background-color: #212121;
 			}
+			#container {
+				display: flex;
+				flex-direction: column;
+				height: 100vh;
+			}
 			button {
 				margin: 4px;
 				padding: 8px;
@@ -68,9 +73,7 @@ return doctype()(
 				background-color: #757575;
 			}
 			#submit {
-				position: absolute;
-				right: 0px;
-				bottom: 0px;
+				float: right;
 				background-color: #311B92;
 			}
 			#submit:hover {
@@ -82,20 +85,19 @@ return doctype()(
 			.pasteTypeHolder {
 				padding: 4px;
 				color: #fff;
-				position: absolute;
-				bottom: 4px;
-				left: 4px;
+				display: inline-block;
 			}
 			textarea {
 				background-color: #111111;
 				border: none;
 				color: #fff;
 				width: 100%;
-				position: absolute;
-				top: 0px;
-				height: calc(100% - 40px);
+				flex-grow: 1;
 				resize: none;
 				outline: 0;
+			}
+			#bottom_container {
+				flex-grow: 0;
 			}
 			#resultholder {
 				padding: 8px;
@@ -116,15 +118,19 @@ return doctype()(
 		]])
 	),
 	tag"body"(
-		tag"textarea"[{name="c", placeholder="Hello World!"}](),
-		tag"button"[{id="submit",formaction=ret.url}]("Paste!"),
-		tag"div"[{class="pasteTypeHolder"}](
-			tag"input"[{type="radio",class="pasteType",name="pasteType",id="radio1",checked=""}],
-			tag"label"[{["for"]="radio1"}]("Normal"),
-			tag"input"[{type="radio",class="pasteType",name="pasteType",id="radio2"}],
-			tag"label"[{["for"]="radio2"}]("Raw"),
-			tag"input"[{type="radio",class="pasteType",name="pasteType",id="radio3"}],
-			tag"label"[{["for"]="radio3"}]("HTML")
+		tag"div"[{id="container"}](
+			tag"textarea"[{name="c", placeholder="Hello World!"}](),
+			tag"div"[{id="bottom_container"}](
+				tag"button"[{id="submit",formaction=ret.url}]("Paste!"),
+				tag"div"[{class="pasteTypeHolder"}](
+					tag"input"[{type="radio",class="pasteType",name="pasteType",id="radio1",checked=""}],
+					tag"label"[{["for"]="radio1"}]("Normal"),
+					tag"input"[{type="radio",class="pasteType",name="pasteType",id="radio2"}],
+					tag"label"[{["for"]="radio2"}]("Raw"),
+					tag"input"[{type="radio",class="pasteType",name="pasteType",id="radio3"}],
+					tag"label"[{["for"]="radio3"}]("HTML")
+				)
+			)
 		),
 		tag"div"[{id="resultholder"}](
 			tag"a"[{id="result"}](""),
