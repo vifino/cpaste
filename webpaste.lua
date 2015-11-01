@@ -43,6 +43,7 @@ return doctype()(
 				background-color: #010101;
 			}
 			button {
+				margin: 4px;
 				padding: 8px;
 				background-color: #222;
 				border: none;
@@ -59,8 +60,8 @@ return doctype()(
 			}
 			#submit {
 				position: absolute;
-				right: 4px;
-				bottom: 4px;
+				right: 0px;
+				bottom: 0px;
 			}
 			.pasteTypeHolder {
 				padding: 4px;
