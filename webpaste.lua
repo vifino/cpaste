@@ -19,7 +19,7 @@ return doctype()(
 							type: sentType
 						},
 						type: "POST",
-						url: $('#submit').attr('action'),
+						url: $('#submit').attr('formaction'),
 						success: function(response) {
 							$('#resultholder').css({
 								display: "block",
@@ -110,14 +110,17 @@ return doctype()(
 	),
 	tag"body"(
 		tag"textarea"[{name="c", placeholder="Hello World!"}](),
-		tag"button"[{id="submit",action=ret.url}]("Paste!"),
+		tag"button"[{id="submit",formaction=ret.url}]("Paste!"),
 		tag"div"[{class="pasteTypeHolder"}](
-			tag"input"[{type="radio",class="pasteType",name="pasteType",id="radio1",checked=""}]("Normal"),
-			tag"input"[{type="radio",class="pasteType",name="pasteType",id="radio2"}]("Raw"),
-			tag"input"[{type="radio",class="pasteType",name="pasteType",id="radio3"}]("HTML")
+			tag"input"[{type="radio",class="pasteType",name="pasteType",id="radio1",checked=""}],
+			tag"label"[{["for"]="radio1"}]("Normal"),
+			tag"input"[{type="radio",class="pasteType",name="pasteType",id="radio2"}],
+			tag"label"[{["for"]="radio2"}]("Raw"),
+			tag"input"[{type="radio",class="pasteType",name="pasteType",id="radio3"}],
+			tag"label"[{["for"]="radio3"}]("HTML")
 		),
 		tag"div"[{id="resultholder"}](
-			tag"a"[{id="result"}],
+			tag"a"[{id="result"}](""),
 			tag"button"[{id="close"}]("Close")
 		)
 	)
