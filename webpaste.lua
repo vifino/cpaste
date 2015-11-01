@@ -56,6 +56,9 @@ return doctype()(
 			button:hover {
 				background-color: #333;
 			}
+			button:active {
+				background-color: #666;
+			}
 			.pasteTypeHolder {
 				padding: 4px;
 				color: #dcdcdc;
