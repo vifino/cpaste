@@ -85,7 +85,12 @@ return doctype()(
 			.pasteTypeHolder {
 				padding: 4px;
 				color: #fff;
-				display: inline-block;
+				position: absolute;
+				top: 50%;
+				transform: translateY(-50%);
+			}
+			.pasteType {
+				vertical-align: text-top;
 			}
 			textarea {
 				background-color: #111111;
@@ -98,6 +103,7 @@ return doctype()(
 			}
 			#bottom_container {
 				flex-grow: 0;
+				position: relative;
 			}
 			#resultholder {
 				padding: 8px;
