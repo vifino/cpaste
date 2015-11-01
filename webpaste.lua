@@ -19,10 +19,11 @@ return doctype()(
 							type: sentType
 						},
 						type: "POST",
-						url: $('#submit').attr('action'),
+						url: $('#submit').attr('formaction'),
 						success: function(response) {
 							$('#resultholder').css({
-								display: "block"
+								display: "block",
+								opacity: "1"
 							});
 							$('#result').html(response);
 							$('#result').attr("href", response);
@@ -31,84 +32,115 @@ return doctype()(
 					});
 					return false
 				});
+				
+				$('#close').click(function() {
+					$('#resultholder').css({
+						opacity: "0"
+					});
+					setTimeout(function() {
+						$('#resultholder').css("display","");
+					}, 200 /*ms*/);
+				});
 			});
 		]]),
 		tag"style"[{type="text/css"}]([[
-			html, body, form {
+			body {
 				overflow: hidden;
 				margin: 0px;
 				width: 100%;
 				height: 100%;
-				background-color: #010101;
+				background-color: #212121;
+			}
+			#container {
+				display: flex;
+				flex-direction: column;
+				height: 100vh;
 			}
 			button {
-				padding: 5px;
-				background-color: #111;
-				border: 2px solid #dcdcdc;
-				color: #dcdcdc;
+				margin: 4px;
+				padding: 8px;
+				background-color: #424242;
+				border: none;
+				border-radius: 2px;
+				color: #fff;
 				text-decoration: none;
-				position: absolute;
-				left: 3px;
-				bottom: 3px;
 				transition: 0.2s;
-				-webkit-transition: 0.2s;
-				-moz-transition: 0.2s;
-				-o-transition: 0.2s;
 			}
 			button:hover {
-				background-color: #010101;
+				background-color: #616161;
 			}
-			div.pasteTypeHolder {
-				padding: 5px;
-				background-color: #010101;
-				color: #dcdcdc;
+			button:active {
+				background-color: #757575;
+			}
+			#submit {
+				float: right;
+				background-color: #311B92;
+			}
+			#submit:hover {
+				background-color: #4527A0;
+			}
+			#submit:active {
+				background-color: #512DA8;
+			}
+			.pasteTypeHolder {
+				padding: 4px;
+				color: #fff;
 				position: absolute;
-				bottom: 3px;
-				left: 60px;
+				top: 50%;
+				transform: translateY(-50%);
+			}
+			.pasteType {
+				vertical-align: text-top;
 			}
 			textarea {
-				background-color: #010101;
-				border: 0px;
+				background-color: #111111;
+				border: none;
 				color: #fff;
 				width: 100%;
-				top: 0px;
-				bottom: 40px;
+				flex-grow: 1;
 				resize: none;
-				position: absolute;
 				outline: 0;
 			}
-			div#resultholder {
-				padding: 5px;
-				background-color: #010101;
-				border: 2px solid #dcdcdc;
+			#bottom_container {
+				flex-grow: 0;
+				position: relative;
+			}
+			#resultholder {
+				padding: 8px;
+				background-color: #424242;
+				border: none;
+				border-radius: 2px;
 				position: fixed;
 				left: 50%;
 				top: 50%;
-				-webkit-transform: translate( -50%, -50% );
-				-moz-transform: translate( -50%, -50% );
-				-ms-transform: translate( -50%, -50% );
 				transform: translate( -50%, -50% );
 				display: none;
+				opacity: 0;
 				transition: 0.2s;
-				-webkit-transition: 0.2s;
-				-moz-transition: 0.2s;
-				-o-transition: 0.2s;
 			}
-			a#result {
-				color: #dcdcdc;
+			#result {
+				color: #fff;
 			}
 		]])
 	),
 	tag"body"(
-		tag"textarea"[{name="c", placeholder="Hello World!"}](),
-		tag"button"[{id="submit",action=ret.url}]("Paste!"),
-		tag"div"[{class="pasteTypeHolder"}](
-			tag"input"[{type="radio",class="pasteType",name="pasteType",id="radio1",checked=""}]("Normal"),
-			tag"input"[{type="radio",class="pasteType",name="pasteType",id="radio2"}]("Raw"),
-			tag"input"[{type="radio",class="pasteType",name="pasteType",id="radio3"}]("HTML")
+		tag"div"[{id="container"}](
+			tag"textarea"[{name="c", placeholder="Hello World!"}](),
+			tag"div"[{id="bottom_container"}](
+				tag"button"[{id="submit",formaction=ret.url}]("Paste!"),
+				tag"div"[{class="pasteTypeHolder"}](
+					tag"input"[{type="radio",class="pasteType",name="pasteType",id="radio1",checked=""}],
+					tag"label"[{["for"]="radio1"}]("Normal"),
+					tag"input"[{type="radio",class="pasteType",name="pasteType",id="radio2"}],
+					tag"label"[{["for"]="radio2"}]("Raw"),
+					tag"input"[{type="radio",class="pasteType",name="pasteType",id="radio3"}],
+					tag"label"[{["for"]="radio3"}]("HTML")
+				)
+			)
 		),
 		tag"div"[{id="resultholder"}](
-			tag"a"[{id="result"}]
+			tag"a"[{id="result"}](""),
+			tag"button"[{id="close"}]("Close")
 		)
 	)
 ):render()
