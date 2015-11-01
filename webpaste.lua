@@ -34,7 +34,7 @@ return doctype()(
 			});
 		]]),
 		tag"style"[{type="text/css"}]([[
-			html, body, form {
+			body {
 				overflow: hidden;
 				margin: 0px;
 				width: 100%;
@@ -42,59 +42,51 @@ return doctype()(
 				background-color: #010101;
 			}
 			button {
-				padding: 5px;
-				background-color: #111;
-				border: 2px solid #dcdcdc;
+				padding: 8px;
+				background-color: #222;
+				border: none;
+				border-radius: 2px;
 				color: #dcdcdc;
 				text-decoration: none;
 				position: absolute;
-				left: 3px;
-				bottom: 3px;
+				right: 4px;
+				bottom: 4px;
 				transition: 0.2s;
-				-webkit-transition: 0.2s;
-				-moz-transition: 0.2s;
-				-o-transition: 0.2s;
 			}
 			button:hover {
-				background-color: #010101;
+				background-color: #333;
 			}
-			div.pasteTypeHolder {
-				padding: 5px;
-				background-color: #010101;
+			.pasteTypeHolder {
+				padding: 4px;
 				color: #dcdcdc;
 				position: absolute;
-				bottom: 3px;
-				left: 60px;
+				bottom: 4px;
+				left: 4px;
 			}
 			textarea {
 				background-color: #010101;
-				border: 0px;
+				border: none;
 				color: #fff;
 				width: 100%;
+				position: absolute;
 				top: 0px;
 				bottom: 40px;
 				resize: none;
-				position: absolute;
 				outline: 0;
 			}
-			div#resultholder {
-				padding: 5px;
-				background-color: #010101;
-				border: 2px solid #dcdcdc;
+			#resultholder {
+				padding: 8px;
+				background-color: #222;
+				border: none;
+				border-radius: 2px;
 				position: fixed;
 				left: 50%;
 				top: 50%;
-				-webkit-transform: translate( -50%, -50% );
-				-moz-transform: translate( -50%, -50% );
-				-ms-transform: translate( -50%, -50% );
 				transform: translate( -50%, -50% );
 				display: none;
 				transition: 0.2s;
-				-webkit-transition: 0.2s;
-				-moz-transition: 0.2s;
-				-o-transition: 0.2s;
 			}
-			a#result {
+			#result {
 				color: #dcdcdc;
 			}
 		]])
