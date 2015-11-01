@@ -22,7 +22,8 @@ return doctype()(
 						url: $('#submit').attr('action'),
 						success: function(response) {
 							$('#resultholder').css({
-								display: "block"
+								display: "block",
+								opacity: "1"
 							});
 							$('#result').html(response);
 							$('#result').attr("href", response);
@@ -87,6 +88,7 @@ return doctype()(
 				top: 50%;
 				transform: translate( -50%, -50% );
 				display: none;
+				opacity: 0;
 				transition: 0.2s;
 			}
 			#result {
