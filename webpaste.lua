@@ -87,7 +87,7 @@ return doctype()(
 				left: 4px;
 			}
 			textarea {
-				background-color: #212121;
+				background-color: #111111;
 				border: none;
 				color: #fff;
 				width: 100%;
