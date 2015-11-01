@@ -32,6 +32,15 @@ return doctype()(
 					});
 					return false
 				});
+				
+				$('#close').click(function() {
+					$('#resultholder').css({
+						opacity: "0"
+					});
+					setTimeout(function() {
+						$('#resultholder').css("display","");
+					}, 200 /*ms*/);
+				});
 			});
 		]]),
 		tag"style"[{type="text/css"}]([[
@@ -108,7 +117,8 @@ return doctype()(
 			tag"input"[{type="radio",class="pasteType",name="pasteType",id="radio3"}]("HTML")
 		),
 		tag"div"[{id="resultholder"}](
-			tag"a"[{id="result"}]
+			tag"a"[{id="result"}],
+			tag"button"[{id="close"}]("Close")
 		)
 	)
 ):render()
