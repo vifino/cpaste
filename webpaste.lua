@@ -8,9 +8,15 @@ return doctype()(
 		tag"script"([[
 			$(document).ready(function() {
 				$('#submit').click(function() {
+					var pasteType = $(".pasteType:checked").val();
+					var sentType = "plain";
+					if (pasteType == "Normal") sentType = "plain";
+					if (pasteType == "Raw") sentType = "raw";
+					if (pasteType == "HTML") sentType = "html";
 					$.ajax({
 						data: {
-							c: $('textarea').val()
+							c: $('textarea').val(),
+							type: sentType
 						},
 						type: "POST",
 						url: $('#submit').attr('action'),
@@ -84,6 +90,12 @@ return doctype()(
 	tag"body"(
 		tag"textarea"[{name="c", placeholder="Hello World!"}](),
 		tag"button"[{id="submit",action=ret.url}]("Paste!"),
+		"Paste as: ",
+		tag"form"[{action=""}](
+			tag"input"[{type="radio",class="pasteType",name="pasteType"}]("Normal"),
+			tag"input"[{type="radio",class="pasteType",name="pasteType"}]("Raw"),
+			tag"input"[{type="radio",class="pasteType",name="pasteType"}]("HTML"),
+		),
 		tag"div"[{id="resultholder"}](
 			tag"a"[{id="result"}]
 		)
