@@ -49,9 +49,6 @@ return doctype()(
 				border-radius: 2px;
 				color: #dcdcdc;
 				text-decoration: none;
-				position: absolute;
-				right: 4px;
-				bottom: 4px;
 				transition: 0.2s;
 			}
 			button:hover {
@@ -59,6 +56,11 @@ return doctype()(
 			}
 			button:active {
 				background-color: #666;
+			}
+			#submit {
+				position: absolute;
+				right: 4px;
+				bottom: 4px;
 			}
 			.pasteTypeHolder {
 				padding: 4px;
