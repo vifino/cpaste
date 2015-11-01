@@ -110,7 +110,7 @@ return doctype()(
 		tag"form"[{action=""}](
 			tag"input"[{type="radio",class="pasteType",name="pasteType1"}]("Normal"),
 			tag"input"[{type="radio",class="pasteType",name="pasteType2"}]("Raw"),
-			tag"input"[{type="radio",class="pasteType",name="pasteType3"}]("HTML"),
+			tag"input"[{type="radio",class="pasteType",name="pasteType3"}]("HTML")
 		),
 		tag"div"[{id="resultholder"}](
 			tag"a"[{id="result"}]
