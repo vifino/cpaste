@@ -49,23 +49,23 @@ return doctype()(
 				margin: 0px;
 				width: 100%;
 				height: 100%;
-				background-color: #010101;
+				background-color: #212121;
 			}
 			button {
 				margin: 4px;
 				padding: 8px;
-				background-color: #222;
+				background-color: #424242;
 				border: none;
 				border-radius: 2px;
-				color: #dcdcdc;
+				color: #fff;
 				text-decoration: none;
 				transition: 0.2s;
 			}
 			button:hover {
-				background-color: #333;
+				background-color: #616161;
 			}
 			button:active {
-				background-color: #666;
+				background-color: #757575;
 			}
 			#submit {
 				position: absolute;
@@ -74,13 +74,13 @@ return doctype()(
 			}
 			.pasteTypeHolder {
 				padding: 4px;
-				color: #dcdcdc;
+				color: #fff;
 				position: absolute;
 				bottom: 4px;
 				left: 4px;
 			}
 			textarea {
-				background-color: #010101;
+				background-color: #212121;
 				border: none;
 				color: #fff;
 				width: 100%;
@@ -92,7 +92,7 @@ return doctype()(
 			}
 			#resultholder {
 				padding: 8px;
-				background-color: #222;
+				background-color: #424242;
 				border: none;
 				border-radius: 2px;
 				position: fixed;
@@ -104,7 +104,7 @@ return doctype()(
 				transition: 0.2s;
 			}
 			#result {
-				color: #dcdcdc;
+				color: #fff;
 			}
 		]])
 	),
