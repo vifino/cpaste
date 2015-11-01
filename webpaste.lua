@@ -93,7 +93,7 @@ return doctype()(
 				width: 100%;
 				position: absolute;
 				top: 0px;
-				bottom: 40px;
+				height: calc(100% - 40px);
 				resize: none;
 				outline: 0;
 			}
