@@ -71,6 +71,13 @@ return doctype()(
 				position: absolute;
 				right: 0px;
 				bottom: 0px;
+				background-color: #311B92;
+			}
+			#submit:hover {
+				background-color: #4527A0;
+			}
+			#submit:active {
+				background-color: #512DA8;
 			}
 			.pasteTypeHolder {
 				padding: 4px;
